@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.cjs",
+    "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
@@ -38,6 +38,7 @@
     "sass-loader": "13.2.0",
     "style-loader": "3.3.1",
     "ts-loader": "^9.4.4",
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "^5.1.6",
     "webpack": "5.75.0",
     "webpack-cli": "5.0.0",
@@ -45,7 +46,9 @@
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
-    "@popperjs/core": "2.11.6",
-    "bootstrap": "5.2.2"
+    "@popperjs/core": "^2.11.8",
+    "@vaadin/router": "^1.7.5",
+    "bootstrap": "^5.3.0",
+    "lit": "^2.7.6"
   }
 }

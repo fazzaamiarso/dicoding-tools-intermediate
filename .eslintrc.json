@@ -5,5 +5,8 @@
   },
   "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
   "ignorePatterns": ["webpack.*"],
-  "rules": {}
+  "rules": {
+    "import/extensions": "off",
+    "class-methods-use-this": "off"
+  }
 }
