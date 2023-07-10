@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "strict": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "es5",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["src/**/*", "scripts/*"],
+  "exclude": ["node_modules"]
+}
