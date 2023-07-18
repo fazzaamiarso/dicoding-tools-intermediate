@@ -8,6 +8,7 @@ class NewPage extends LitNoShadow {
   private _onSubmit(e: Event) {
     e.preventDefault();
     if (!(e.currentTarget instanceof HTMLFormElement)) return;
+
     this._validateForm(e.currentTarget);
     if (!this._isFormValid(e.currentTarget)) return;
 
@@ -29,6 +30,12 @@ class NewPage extends LitNoShadow {
 
   protected render() {
     return html` <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">New</li>
+        </ol>
+      </nav>
       <h2>New Story</h2>
       <form @submit=${this._onSubmit} novalidate>
         <div class="mb-3">
@@ -36,14 +43,12 @@ class NewPage extends LitNoShadow {
           <input class="form-control" name="story-image" type="file" id="story-image" accept="image/*" required />
           <p class="valid-feedback">Look's good!</p>
           <p class="invalid-feedback">Please upload an image</p>
-          <!-- <p id="story-image-error" class=""></p> -->
         </div>
         <div class="mb-3">
           <label for="story-description" class="form-label">Description</label>
           <textarea class="form-control" name="story-description" id="story-description" required></textarea>
           <p class="valid-feedback">Look's good!</p>
           <p class="invalid-feedback">Please provide a valid description</p>
-          <!-- <p id="story-description-error" class=""></p> -->
         </div>
         <button class="btn btn-primary">Post Story</button>
       </form>
