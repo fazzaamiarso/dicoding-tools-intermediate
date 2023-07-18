@@ -9,4 +9,7 @@ import "./pages";
 import "./components";
 
 const router = new Router(document.getElementById("outlet"));
-router.setRoutes([{ path: "/", component: "home-page" }]);
+router.setRoutes([
+  { path: "/", component: "home-page" },
+  { path: "/new", component: "new-page" },
+]);

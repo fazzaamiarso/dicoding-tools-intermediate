@@ -1,13 +1,13 @@
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
-import data from "@/DATA";
 import LitNoShadow from "@/components/lit-no-shadow";
+import StoryService from "@/services/story-service";
 
 @customElement("home-page")
 class HomePage extends LitNoShadow {
   protected render() {
     return html`<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-      ${data.listStory.map(
+      ${StoryService.getAllStories().map(
         (story) =>
           html`<div class="col">
             <div class="card rounded-2">

@@ -1,10 +1,11 @@
 import { customElement } from "lit/decorators.js";
-import { LitElement, html } from "lit";
+import { html } from "lit";
+import LitNoShadow from "./lit-no-shadow";
 
 @customElement("app-footer")
-class Footer extends LitElement {
+class Footer extends LitNoShadow {
   protected render() {
-    return html`<footer>
+    return html`<footer class="container-sm">
       <p>Made by Fazza Razaq Amiarso - 2023</p>
     </footer>`;
   }
