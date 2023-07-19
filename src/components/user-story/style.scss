@@ -1,0 +1,30 @@
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story {
+    &__container {
+        @include reset-list;
+        width: 100%;
+        overflow-x: scroll;
+        padding-block: 1rem;
+        margin-inline: auto;
+        white-space: nowrap;
+    }
+    &__item {
+        $diameter : 3.5rem;
+        margin-right: 1rem;
+        display: inline-block;
+        border-radius: 1000px;
+        background-color: black;
+        width: $diameter;
+        height: $diameter;
+        overflow: hidden;
+    }
+    &__img {
+        object-fit: cover;
+        object-position: center;
+    }
+}   
