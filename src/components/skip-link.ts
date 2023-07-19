@@ -1,7 +1,9 @@
 import { customElement } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
+import { localized, msg } from "@lit/localize";
 
 @customElement("skip-link")
+@localized()
 class SkipLink extends LitElement {
   static styles = css`
     a {
@@ -22,7 +24,7 @@ class SkipLink extends LitElement {
   `;
 
   protected render() {
-    return html`<a href="#outlet">Skip to content</a>`;
+    return html`<a href="#outlet">${msg("Skip to content")}</a>`;
   }
 }
 

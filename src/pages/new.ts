@@ -1,9 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
+import { localized, msg } from "@lit/localize";
 import LitNoShadow from "@/components/lit-no-shadow";
 
 @customElement("new-page")
+@localized()
 class NewPage extends LitNoShadow {
   private _onSubmit(e: Event) {
     e.preventDefault();
@@ -39,18 +41,18 @@ class NewPage extends LitNoShadow {
       <h2>New Story</h2>
       <form @submit=${this._onSubmit} novalidate>
         <div class="mb-3">
-          <label for="story-image" class="form-label">Upload image</label>
+          <label for="story-image" class="form-label"> ${msg("Upload image")}</label>
           <input class="form-control" name="story-image" type="file" id="story-image" accept="image/*" required />
-          <p class="valid-feedback">Look's good!</p>
-          <p class="invalid-feedback">Please upload an image</p>
+          <p class="valid-feedback">${msg("Look's good!")}</p>
+          <p class="invalid-feedback">${msg("Please provide a valid description")}</p>
         </div>
         <div class="mb-3">
-          <label for="story-description" class="form-label">Description</label>
+          <label for="story-description" class="form-label">${msg("Description")} </label>
           <textarea class="form-control" name="story-description" id="story-description" required></textarea>
-          <p class="valid-feedback">Look's good!</p>
-          <p class="invalid-feedback">Please provide a valid description</p>
+          <p class="valid-feedback">${msg("Look's good!")}</p>
+          <p class="invalid-feedback">${msg("Please provide a valid description")}</p>
         </div>
-        <button class="btn btn-primary">Post Story</button>
+        <button class="btn btn-primary">${msg("Post Story")}</button>
       </form>
     </div>`;
   }

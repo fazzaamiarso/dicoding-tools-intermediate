@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="ko" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sd24aaff71404c9e1">
+  <source>Upload image</source>
+  <target>이미지 업로드</target>
+</trans-unit>
+<trans-unit id="s598f4ebeaebe1a9c">
+  <source>Look's good!</source>
+  <target>좋은</target>
+</trans-unit>
+<trans-unit id="s5ad82a9ed25c0d45">
+  <source>Please provide a valid description</source>
+  <target>올바른 설명을 입력하세요</target>
+</trans-unit>
+<trans-unit id="s63d894b1ddb06289">
+  <source>Description</source>
+  <target>설명</target>
+</trans-unit>
+<trans-unit id="s5d88bcf38f034ab2">
+  <source>Post Story</source>
+  <target>포스트 스토리</target>
+</trans-unit>
+<trans-unit id="sd5e9b70ffb7a8b46">
+  <source>Skip to content</source>
+  <target>내용으로 건너뛰기</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

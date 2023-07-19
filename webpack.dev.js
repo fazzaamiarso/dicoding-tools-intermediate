@@ -15,6 +15,5 @@ module.exports = merge(common, {
       },
     },
     historyApiFallback: true,
-    watchFiles: ["src/**/*"],
   },
 });

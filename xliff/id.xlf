@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="id" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sd24aaff71404c9e1">
+   <source>Upload image</source>
+  <target>Unggah Gambar</target>
+</trans-unit>
+<trans-unit id="s598f4ebeaebe1a9c">
+   <source>Look's good!</source>
+  <target>Cocok!</target>
+</trans-unit>
+<trans-unit id="s5ad82a9ed25c0d45">
+  <source>Please provide a valid description</source>
+  <target>Berikanlah deskripsi yang valid</target>
+</trans-unit>
+<trans-unit id="s63d894b1ddb06289">
+  <source>Description</source>
+  <target>Deskripsi</target>
+</trans-unit>
+<trans-unit id="s5d88bcf38f034ab2">
+   <source>Post Story</source>
+  <target>Unggah Cerita</target>
+</trans-unit>
+<trans-unit id="sd5e9b70ffb7a8b46">
+    <source>Skip to content</source>
+  <target>Langsung ke konten</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

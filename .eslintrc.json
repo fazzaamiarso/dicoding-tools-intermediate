@@ -4,7 +4,7 @@
     "project": "./tsconfig.eslint.json"
   },
   "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
-  "ignorePatterns": ["webpack.*"],
+  "ignorePatterns": ["webpack.*", "generated"],
   "rules": {
     "import/extensions": "off",
     "class-methods-use-this": "off"

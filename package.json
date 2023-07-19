@@ -17,13 +17,14 @@
     "@babel/eslint-parser": "^7.22.7",
     "@babel/preset-env": "7.20.2",
     "@babel/preset-typescript": "^7.22.5",
+    "@lit/localize-tools": "^0.6.9",
     "@types/bootstrap": "^5.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "autoprefixer": "10.4.13",
     "babel-loader": "9.1.0",
     "clean-webpack-plugin": "4.0.0",
-    "copy-webpack-plugin": "11.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "6.7.2",
     "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -46,6 +47,7 @@
     "webpack-merge": "5.8.0"
   },
   "dependencies": {
+    "@lit/localize": "^0.11.4",
     "@popperjs/core": "^2.11.8",
     "@vaadin/router": "^1.7.5",
     "bootstrap": "^5.3.0",

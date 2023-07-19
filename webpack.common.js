@@ -18,6 +18,7 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()],
     extensions: [".tsx", ".ts", ".js"],
   },
+  context: path.resolve(__dirname, "src"),
   module: {
     rules: [
       {
@@ -50,20 +51,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new ESLintPlugin(),
+    new ESLintPlugin({ baseConfig: { extends: ".eslintrc.json" } }),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname, "src/index.html"),
       title: "Monogatari",
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, "src/public/"),
-    //       to: path.resolve(__dirname, "dist/"),
-    //     },
-    //   ],
-    // }),
-    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [{ from: path.resolve(__dirname, "src/generated/"), to: path.resolve(__dirname, "dist/generated/") }],
+    }),
   ],
 };
