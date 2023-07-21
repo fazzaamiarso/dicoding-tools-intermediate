@@ -14,10 +14,9 @@ class NewPage extends LitNoShadow {
     this._validateForm(e.currentTarget);
     if (!this._isFormValid(e.currentTarget)) return;
 
-    const formData = new FormData(e.currentTarget);
-    const imageFile = formData.get("story-image");
-    const description = formData.get("story-description");
-    console.log({ imageFile, description });
+    // const formData = new FormData(e.currentTarget);
+    // const imageFile = formData.get("story-image");
+    // const description = formData.get("story-description");
 
     window.location.assign("/");
   }

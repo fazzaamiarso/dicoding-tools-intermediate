@@ -52,16 +52,16 @@ class HomePage extends LitNoShadow {
   }
 
   _renderStoryCard(story: Story) {
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      dateStyle: "long",
+    }).format(new Date(story.createdAt));
+
     return html`<div class="col">
       <div class="card rounded-2">
         <img data-src=${story.photoUrl} class="card-img-top lazyload" alt=${story.name} />
         <div class="card-body">
           <h2 class="card-title">${story.name}</h2>
-          <div class="card-text">
-            ${new Intl.DateTimeFormat("en-US", {
-              dateStyle: "long",
-            }).format(new Date(story.createdAt))}
-          </div>
+          <div class="card-text">${formattedDate}</div>
           <p class="card-text">${story.description}</p>
         </div>
       </div>

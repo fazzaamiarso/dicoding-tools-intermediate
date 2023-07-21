@@ -1,12 +1,8 @@
-@mixin reset-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+@use "../../sass/config";
 
 .story {
     &__container {
-        @include reset-list;
+        @include config.reset-list;
         width: 100%;
         overflow-x: scroll;
         padding-block: 1rem;

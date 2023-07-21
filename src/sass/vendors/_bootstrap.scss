@@ -1,6 +1,27 @@
+@use "../vendors-override/bootstrap/components/placeholder" as placeholder;
+@use "../vendors-override/bootstrap/components/badge" as bdg;
+@use "../vendors-override/bootstrap/components/buttons" as btn;
+@use "../vendors-override/bootstrap/components/card" as card;
+@use "../vendors-override/bootstrap/components/breadcrumb" as bc;
+
 @import "../../../node_modules/bootstrap/scss/functions";
 
-// 2. Include any default variable overrides here
+// Placeholder
+$placeholder-opacity-max: placeholder.$opacity-max;
+$placeholder-opacity-min: placeholder.$opacity-min;
+
+// Badge
+$badge-font-size: bdg.$font-size;
+
+// Button
+$btn-disabled-opacity: btn.$disabled-opacity;
+$btn-transition: btn.$transition;
+
+// Card
+$card-box-shadow: card.$box-shadow;
+
+// Breadcrumbs
+$breadcrumb-padding-y: bc.$padding-y;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
 @import "../../../node_modules/bootstrap/scss/variables";
@@ -34,6 +55,4 @@
 @import "../../../node_modules/bootstrap/scss/nav";
 @import "../../../node_modules/bootstrap/scss/navbar";
 @import "../../../node_modules/bootstrap/scss/forms";
-
-
 
