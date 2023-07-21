@@ -14,11 +14,12 @@ class NewPage extends LitNoShadow {
     this._validateForm(e.currentTarget);
     if (!this._isFormValid(e.currentTarget)) return;
 
-    // const formData = new FormData(e.currentTarget);
-    // const imageFile = formData.get("story-image");
-    // const description = formData.get("story-description");
+    const formData = new FormData(e.currentTarget);
+    const imageFile = formData.get("story-image");
+    const description = formData.get("story-description");
 
-    window.location.assign("/");
+    // eslint-disable-next-line no-alert
+    window.alert(`New Story added: ${JSON.stringify({ imageFile, description })}`);
   }
 
   private _validateForm(form: HTMLFormElement) {
@@ -37,10 +38,10 @@ class NewPage extends LitNoShadow {
           <li class="breadcrumb-item active" aria-current="page">New</li>
         </ol>
       </nav>
-      <h2>New Story</h2>
+      <h2>${msg("New Story")}</h2>
       <form @submit=${this._onSubmit} novalidate>
         <div class="mb-3">
-          <label for="story-image" class="form-label"> ${msg("Upload image")}</label>
+          <label for="story-image" class="form-label">${msg("Upload image")}</label>
           <input class="form-control" name="story-image" type="file" id="story-image" accept="image/*" required />
           <p class="valid-feedback">${msg("Look's good!")}</p>
           <p class="invalid-feedback">${msg("Please provide a valid description")}</p>

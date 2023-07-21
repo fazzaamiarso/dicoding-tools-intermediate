@@ -26,6 +26,22 @@
     <source>Skip to content</source>
   <target>Langsung ke konten</target>
 </trans-unit>
+<trans-unit id="s6b45ede00eecd498">
+  <source>New Story</source>
+  <target>Cerita Baru</target>
+</trans-unit>
+<trans-unit id="s9d8b8aa2b404c2c8">
+  <source>Settings</source>
+  <target>Pengaturan</target>
+</trans-unit>
+<trans-unit id="sc8da3cc71de63832">
+  <source>Login</source>
+  <target>Masuk</target>
+</trans-unit>
+<trans-unit id="s000bc149a37a223c">
+  <source>Select preferred language:</source>
+  <target>Pilih bahasa yang diinginkan:</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

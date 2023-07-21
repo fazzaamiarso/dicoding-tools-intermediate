@@ -1,8 +1,10 @@
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
+import { localized, msg } from "@lit/localize";
 import LitNoShadow from "./lit-no-shadow";
 
 @customElement("app-header")
+@localized()
 class Header extends LitNoShadow {
   protected render() {
     return html`
@@ -30,6 +32,20 @@ class Header extends LitNoShadow {
               <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger">99+</span>
             </li>
           </ul>
+          <div class="dropdown">
+            <button
+              class="dropdown-toggle btn btn-tertiary"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="https://api.dicebear.com/6.x/avataaars-neutral/svg" alt="" width="40" class="rounded-circle" />
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a href="#" class="dropdown-item">${msg("Login")}</a></li>
+              <li><a href="/setting" class="dropdown-item">${msg("Settings")}</a></li>
+            </ul>
+          </div>
         </div>
       </header>
     `;

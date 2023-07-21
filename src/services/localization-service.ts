@@ -6,7 +6,7 @@ export const { getLocale, setLocale } = configureLocalization({
   targetLocales,
   async loadLocale(locale) {
     // eslint-disable-next-line import/no-dynamic-require, global-require
-    return require(`/generated/locales/${locale}.js`);
+    return require(`/generated/locales/${locale}.ts`);
   },
 });
 
@@ -18,8 +18,8 @@ export const setLocaleFromUrl = async () => {
 };
 
 export const localeNames = {
-  en: "English",
-  id: "Indonesia",
-  ja: "Japanese",
-  ko: "Korean",
+  en: "🇬🇧 English",
+  id: "🇮🇩 Indonesia",
+  ja: "🇯🇵 Japanese",
+  ko: "🇰🇷 Korean",
 } as Record<string, string>;

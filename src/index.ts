@@ -10,4 +10,5 @@ const router = new Router(document.getElementById("outlet"));
 router.setRoutes([
   { path: "/", component: "home-page" },
   { path: "/new", component: "new-page" },
+  { path: "/setting", component: "setting-page" },
 ]);

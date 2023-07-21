@@ -26,6 +26,22 @@
   <source>Skip to content</source>
   <target>コンテンツにスキップ</target>
 </trans-unit>
+<trans-unit id="s6b45ede00eecd498">
+  <source>New Story</source>
+  <target>新しい話</target>
+</trans-unit>
+<trans-unit id="s9d8b8aa2b404c2c8">
+  <source>Settings</source>
+  <target>設定</target>
+</trans-unit>
+<trans-unit id="sc8da3cc71de63832">
+  <source>Login</source>
+  <target>ログイン</target>
+</trans-unit>
+<trans-unit id="s000bc149a37a223c">
+  <source>Select preferred language:</source>
+  <target>優先言語を選択してください</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
