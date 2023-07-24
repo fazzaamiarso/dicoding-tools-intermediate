@@ -10,7 +10,7 @@ import storyService from "@/services/story-service";
 class Header extends LitNoShadow {
   private _logout() {
     storyService.logout();
-    window.location.assign("/auth/login");
+    window.location.assign("/login");
   }
 
   protected render() {

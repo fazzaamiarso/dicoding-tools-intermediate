@@ -1,4 +1,5 @@
 import "./sass/main.scss";
+import "toastify-js/src/toastify.css";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import "bootstrap";

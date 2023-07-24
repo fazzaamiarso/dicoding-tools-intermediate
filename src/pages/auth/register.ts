@@ -19,12 +19,13 @@ class RegisterPage extends LitNoShadow {
     const password = formData.get("password") as string;
 
     await storyService.register({ name, email, password });
+    await storyService.login({ email, password });
     window.location.assign("/");
   }
 
   protected render() {
     return html`
-      <main class="d-flex align-items-center justify-content-center container">
+      <main style="height:100vh;" class="d-flex align-items-center justify-content-center container">
         <div class="container-sm">
           <h2 class="mb-4">${msg("Register")}</h2>
           <form @submit=${this._onSubmit}>
@@ -36,10 +37,7 @@ class RegisterPage extends LitNoShadow {
               <label for="email" class="form-label">Email</label>
               <input id="email" name="email" class="form-control" required />
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input id="password" type="password" name="password" class="form-control" required minlength="8" />
-            </div>
+            <password-field></password-field>
             <button class="btn btn-primary">Register</button>
           </form>
         </div>

@@ -1,0 +1,37 @@
+/* eslint-disable no-underscore-dangle */
+import { html } from "lit";
+import { customElement, state } from "lit/decorators.js";
+import LitNoShadow from "./lit-no-shadow";
+
+@customElement("password-field")
+class PasswordField extends LitNoShadow {
+  @state() _shouldShow = false;
+
+  private _toggleVisibility() {
+    this._shouldShow = !this._shouldShow;
+  }
+
+  render() {
+    return html`
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <input
+            id="password"
+            type=${this._shouldShow ? "text" : "password"}
+            name="password"
+            class="form-control"
+            required
+          />
+          <span class="input-group-text" @click=${this._toggleVisibility}
+            >${this._shouldShow
+              ? html`<bs-icon icon="bi-eye-slash-fill"></bs-icon>`
+              : html`<bs-icon icon="bi-eye-fill"></bs-icon>`}</span
+          >
+        </div>
+      </div>
+    `;
+  }
+}
+
+export default PasswordField;

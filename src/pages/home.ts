@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { customElement, state } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
+import { Task } from "@lit-labs/task";
 import LitNoShadow from "@/components/lit-no-shadow";
 import StoryService from "@/services/story-service";
 import { Story } from "@/types";
@@ -12,24 +13,24 @@ import { appTemplate } from "@/components/layout/app-template";
 
 @customElement("home-page")
 class HomePage extends LitNoShadow {
-  @state() private _stories: Story[] = [];
-
-  @state() private _isLoading: boolean = false;
-
-  constructor() {
-    super();
-    this._isLoading = true;
-    StoryService.getAllStories().then((result) => {
-      this._stories = result;
-      this._isLoading = false;
-    });
-  }
+  private _storyTask = new Task(
+    this,
+    async () => {
+      const { error, message, data } = await StoryService.getAllStories();
+      if (error) throw Error(message);
+      return data ?? [];
+    },
+    () => [],
+  );
 
   protected render() {
     return appTemplate(
-      html` <user-story></user-story>
+      html`<user-story></user-story>
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-          ${this._isLoading ? map(range(9), this._renderPlaceholder) : this._stories.map(this._renderStoryCard)}
+          ${this._storyTask.render({
+            pending: () => map(range(9), this._renderPlaceholder),
+            complete: (stories) => stories.map(this._renderStoryCard),
+          })}
         </div>`,
     );
   }

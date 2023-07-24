@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Story } from "@/types";
+import { Story } from "@/types";
 
 const BASE_URL = "https://story-api.dicoding.dev/v1/";
 const AUTH_KEY = "monogatari_access_token";
@@ -18,24 +18,42 @@ storyClient.interceptors.request.use((req) => {
   return req;
 });
 
-const getAllStories = async (): Promise<Story[]> => {
-  const response = await storyClient.get("stories");
-  return response.data.listStory;
+const getAllStories = async () => {
+  try {
+    const response = await storyClient.get("stories");
+    return { error: false, data: response.data.listStory as Story[] };
+  } catch (e: any) {
+    return { error: true, message: e.response.data.message };
+  }
 };
 
 const addStory = async (data: { description: string; photo: File }) => {
-  await storyClient.post("stories", data, { headers: { "Content-Type": "multipart/form-data" } });
+  try {
+    await storyClient.post("stories", data, { headers: { "Content-Type": "multipart/form-data" } });
+    return { error: false, message: "Success" };
+  } catch (e: any) {
+    return { error: true, message: e.response.data.message };
+  }
 };
 
 const login = async (credentials: { email: string; password: string }) => {
-  const response = await storyClient.post("login", credentials);
-  const accessToken = response.data.loginResult.token;
-  putAccessToken(accessToken);
+  try {
+    const response = await storyClient.post("login", credentials);
+    const accessToken = response.data.loginResult.token;
+    putAccessToken(accessToken);
+    return { error: false, message: "Success" };
+  } catch (e: any) {
+    return { error: true, message: e.response.data.message };
+  }
 };
 
 const register = async (credentials: { name: string; email: string; password: string }) => {
-  await storyClient.post("register", credentials);
-  await login({ email: credentials.email, password: credentials.password });
+  try {
+    await storyClient.post("register", credentials);
+    return { error: false, message: "Success" };
+  } catch (e: any) {
+    return { error: true, message: e.response.data.message };
+  }
 };
 
 const logout = () => {
