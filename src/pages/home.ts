@@ -8,6 +8,7 @@ import StoryService from "@/services/story-service";
 import { Story } from "@/types";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
+import { appTemplate } from "@/components/layout/app-template";
 
 @customElement("home-page")
 class HomePage extends LitNoShadow {
@@ -25,10 +26,12 @@ class HomePage extends LitNoShadow {
   }
 
   protected render() {
-    return html` <user-story></user-story>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-        ${this._isLoading ? map(range(9), this._renderPlaceholder) : this._stories.map(this._renderStoryCard)}
-      </div>`;
+    return appTemplate(
+      html` <user-story></user-story>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+          ${this._isLoading ? map(range(9), this._renderPlaceholder) : this._stories.map(this._renderStoryCard)}
+        </div>`,
+    );
   }
 
   _renderPlaceholder() {

@@ -1,11 +1,18 @@
+/* eslint-disable no-underscore-dangle */
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import LitNoShadow from "./lit-no-shadow";
+import storyService from "@/services/story-service";
 
 @customElement("app-header")
 @localized()
 class Header extends LitNoShadow {
+  private _logout() {
+    storyService.logout();
+    window.location.assign("/auth/login");
+  }
+
   protected render() {
     return html`
       <header class="container-sm">
@@ -50,8 +57,9 @@ class Header extends LitNoShadow {
                 />
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a href="#" class="dropdown-item">${msg("Login")}</a></li>
                 <li><a href="/setting" class="dropdown-item">${msg("Settings")}</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><button class="dropdown-item" @click=${this._logout}>${msg("Logout")}</button></li>
               </ul>
             </div>
           </div>

@@ -24,7 +24,7 @@ class SkipLink extends LitElement {
   `;
 
   protected render() {
-    return html`<a href="#outlet">${msg("Skip to content")}</a>`;
+    return html`<a href="#main-content">${msg("Skip to content")}</a>`;
   }
 }
 
