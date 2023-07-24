@@ -23,6 +23,10 @@ const getAllStories = async (): Promise<Story[]> => {
   return response.data.listStory;
 };
 
+const addStory = async (data: { description: string; photo: File }) => {
+  await storyClient.post("stories", data, { headers: { "Content-Type": "multipart/form-data" } });
+};
+
 const login = async (credentials: { email: string; password: string }) => {
   const response = await storyClient.post("login", credentials);
   const accessToken = response.data.loginResult.token;
@@ -42,6 +46,7 @@ const isAuthenticated = () => getAccessToken() !== null;
 
 export default {
   getAllStories,
+  addStory,
   register,
   login,
   logout,

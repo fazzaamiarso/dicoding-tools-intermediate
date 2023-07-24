@@ -4,11 +4,12 @@ import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import LitNoShadow from "@/components/lit-no-shadow";
 import { appTemplate } from "@/components/layout/app-template";
+import storyService from "@/services/story-service";
 
 @customElement("new-page")
 @localized()
 class NewPage extends LitNoShadow {
-  private _onSubmit(e: Event) {
+  private async _onSubmit(e: Event) {
     e.preventDefault();
     if (!(e.currentTarget instanceof HTMLFormElement)) return;
 
@@ -16,11 +17,12 @@ class NewPage extends LitNoShadow {
     if (!this._isFormValid(e.currentTarget)) return;
 
     const formData = new FormData(e.currentTarget);
-    const imageFile = formData.get("story-image");
-    const description = formData.get("story-description");
+    const imageFile = formData.get("story-image") as File;
+    const description = formData.get("story-description") as string;
 
-    // eslint-disable-next-line no-alert
-    window.alert(`New Story added: ${JSON.stringify({ imageFile, description })}`);
+    await storyService.addStory({ photo: imageFile, description });
+
+    window.location.assign("/");
   }
 
   private _validateForm(form: HTMLFormElement) {
