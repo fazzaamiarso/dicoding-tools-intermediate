@@ -1,10 +1,10 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import LitNoShadow from "@/components/lit-no-shadow";
 import { appTemplate } from "@/components/layout/app-template";
 import storyService from "@/services/story-service";
+import authService from "@/services/api/auth-service";
 
 @customElement("new-page")
 @localized()
@@ -26,8 +26,8 @@ class NewPage extends LitNoShadow {
   }
 
   // eslint-disable-next-line consistent-return
-  onBeforeEnter(_location: any, commands: any) {
-    if (!storyService.isAuthenticated()) {
+  async onBeforeEnter(_location: any, commands: any) {
+    if (!(await authService.isAuthenticated())) {
       return commands.redirect("/login");
     }
   }

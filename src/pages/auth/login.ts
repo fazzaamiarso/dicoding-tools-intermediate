@@ -1,21 +1,20 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement, query, state } from "lit/decorators.js";
 import { html } from "lit";
 import Toastify from "toastify-js";
 import { localized, msg } from "@lit/localize";
 import LitNoShadow from "@/components/lit-no-shadow";
-import storyService from "@/services/story-service";
+import authService from "@/services/api/auth-service";
 
 @customElement("login-page")
 @localized()
 class LoginPage extends LitNoShadow {
   @query("form") form!: HTMLFormElement;
 
-  @state() _isSubmitting = false;
+  @state() private _isSubmitting = false;
 
   // eslint-disable-next-line consistent-return
-  onBeforeEnter(_location: any, commands: any) {
-    if (storyService.isAuthenticated()) {
+  async onBeforeEnter(_location: any, commands: any) {
+    if (await authService.isAuthenticated()) {
       return commands.redirect("/");
     }
   }
@@ -37,26 +36,25 @@ class LoginPage extends LitNoShadow {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    const { error, message } = await storyService.login({ email, password });
-    if (error) {
+    try {
+      await authService.login({ email, password });
+      window.location.assign("/");
+    } catch (error: any) {
       Toastify({
-        text: message,
+        text: error.message,
         duration: 3000,
         close: true,
         gravity: "top",
         position: "center",
       }).showToast();
+    } finally {
       this._isSubmitting = false;
-      return;
     }
-
-    window.location.assign("/");
   }
 
   private _setValidationMessage() {
     this.form.querySelectorAll("input").forEach((input) => {
       const parentElement = input.id === "password" ? input.parentElement?.parentElement : input.parentElement;
-      // eslint-disable-next-line no-param-reassign
       parentElement!.querySelector(".invalid-feedback")!.innerHTML = input.validationMessage;
     });
   }
@@ -82,7 +80,6 @@ class LoginPage extends LitNoShadow {
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input id="email" name="email" type="email" class="form-control" required />
-              <p class="valid-feedback">Look's good!</p>
               <p class="invalid-feedback"></p>
             </div>
             <password-field></password-field>

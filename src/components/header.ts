@@ -1,15 +1,14 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import LitNoShadow from "./lit-no-shadow";
-import storyService from "@/services/story-service";
+import authService from "@/services/api/auth-service";
 
 @customElement("app-header")
 @localized()
 class Header extends LitNoShadow {
   private _logout() {
-    storyService.logout();
+    authService.logout();
     window.location.assign("/login");
   }
 

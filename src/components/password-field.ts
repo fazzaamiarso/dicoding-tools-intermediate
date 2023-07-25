@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import LitNoShadow from "./lit-no-shadow";
@@ -30,7 +29,6 @@ class PasswordField extends LitNoShadow {
               : html`<bs-icon icon="bi-eye-fill" size=${20}></bs-icon>`}</span
           >
           <p class="invalid-feedback"></p>
-          <p class="valid-feedback">Look's good!</p>
         </div>
       </div>
     `;

@@ -1,22 +1,22 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
 import { Task } from "@lit-labs/task";
 import LitNoShadow from "@/components/lit-no-shadow";
-import StoryService from "@/services/story-service";
+import storyService from "@/services/story-service";
 import { Story } from "@/types";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 import { appTemplate } from "@/components/layout/app-template";
+import authService from "@/services/api/auth-service";
 
 @customElement("home-page")
 class HomePage extends LitNoShadow {
   private _storyTask = new Task(
     this,
     async () => {
-      const { error, message, data } = await StoryService.getAllStories();
+      const { error, message, data } = await storyService.getAllStories();
       if (error) throw Error(message);
       return data ?? [];
     },
@@ -24,8 +24,8 @@ class HomePage extends LitNoShadow {
   );
 
   // eslint-disable-next-line consistent-return
-  onBeforeEnter(_location: any, commands: any) {
-    if (!StoryService.isAuthenticated()) {
+  async onBeforeEnter(_location: any, commands: any) {
+    if (!(await authService.isAuthenticated())) {
       return commands.redirect("/login");
     }
   }

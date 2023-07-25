@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement, state } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
 import { styleMap } from "lit/directives/style-map.js";
