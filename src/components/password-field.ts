@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import LitNoShadow from "./lit-no-shadow";
+import LitNoShadow from "./base/lit-no-shadow";
 
 @customElement("password-field")
 class PasswordField extends LitNoShadow {

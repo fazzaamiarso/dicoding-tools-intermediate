@@ -1,6 +1,6 @@
 import { customElement, property } from "lit/decorators.js";
 import { html } from "lit";
-import LitNoShadow from "./lit-no-shadow";
+import LitNoShadow from "./base/lit-no-shadow";
 
 @customElement("bs-icon")
 class BoostrapIcon extends LitNoShadow {

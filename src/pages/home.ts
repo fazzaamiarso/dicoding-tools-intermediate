@@ -3,28 +3,20 @@ import { html } from "lit";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
 import { Task } from "@lit-labs/task";
-import LitNoShadow from "@/components/lit-no-shadow";
 import storyService from "@/services/api/story-service";
 import { Story } from "@/types";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
 import { appTemplate } from "@/components/layout/app-template";
-import authService from "@/services/api/auth-service";
+import AppPage from "@/components/base/app-page";
 
 @customElement("home-page")
-class HomePage extends LitNoShadow {
+class HomePage extends AppPage {
   private _storyTask = new Task(
     this,
     async () => storyService.getAllStories(),
     () => [],
   );
-
-  // eslint-disable-next-line consistent-return
-  async onBeforeEnter(_location: any, commands: any) {
-    if (!(await authService.isAuthenticated())) {
-      return commands.redirect("/login");
-    }
-  }
 
   protected render() {
     return appTemplate(

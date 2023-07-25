@@ -1,7 +1,7 @@
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
-import LitNoShadow from "./lit-no-shadow";
+import LitNoShadow from "./base/lit-no-shadow";
 import authService from "@/services/api/auth-service";
 
 @customElement("app-header")

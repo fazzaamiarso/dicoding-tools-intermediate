@@ -2,7 +2,7 @@ import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
-import LitNoShadow from "../lit-no-shadow";
+import LitNoShadow from "../base/lit-no-shadow";
 import "./style.scss";
 
 @customElement("user-story")

@@ -2,15 +2,14 @@
 import { customElement, query, state } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
-import Toastify from "toastify-js";
-import LitNoShadow from "@/components/lit-no-shadow";
 import { appTemplate } from "@/components/layout/app-template";
 import storyService from "@/services/api/story-service";
-import authService from "@/services/api/auth-service";
+import { dangerToast } from "@/components/ui/toast";
+import AppPage from "@/components/base/app-page";
 
 @customElement("new-page")
 @localized()
-class NewPage extends LitNoShadow {
+class NewPage extends AppPage {
   @query("form") form!: HTMLFormElement;
 
   @state() private _isSubmitting = false;
@@ -34,22 +33,9 @@ class NewPage extends LitNoShadow {
       await storyService.addStory({ photo: imageFile, description });
       window.location.assign("/");
     } catch (error: any) {
-      Toastify({
-        text: error.message,
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "center",
-      }).showToast();
+      dangerToast(error.message).showToast();
     } finally {
       this._isSubmitting = false;
-    }
-  }
-
-  // eslint-disable-next-line consistent-return
-  async onBeforeEnter(_location: any, commands: any) {
-    if (!(await authService.isAuthenticated())) {
-      return commands.redirect("/login");
     }
   }
 

@@ -1,23 +1,16 @@
 import { customElement, query, state } from "lit/decorators.js";
 import { html } from "lit";
-import Toastify from "toastify-js";
 import { localized, msg } from "@lit/localize";
-import LitNoShadow from "@/components/lit-no-shadow";
 import authService from "@/services/api/auth-service";
+import { dangerToast } from "@/components/ui/toast";
+import AuthPage from "@/components/base/auth-page";
 
 @customElement("login-page")
 @localized()
-class LoginPage extends LitNoShadow {
+class LoginPage extends AuthPage {
   @query("form") form!: HTMLFormElement;
 
   @state() private _isSubmitting = false;
-
-  // eslint-disable-next-line consistent-return
-  async onBeforeEnter(_location: any, commands: any) {
-    if (await authService.isAuthenticated()) {
-      return commands.redirect("/");
-    }
-  }
 
   private async _onSubmit(event: Event) {
     event.preventDefault();
@@ -39,13 +32,7 @@ class LoginPage extends LitNoShadow {
       await authService.login({ email, password });
       window.location.assign("/");
     } catch (error: any) {
-      Toastify({
-        text: error.message,
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "center",
-      }).showToast();
+      dangerToast(error.message).showToast();
     } finally {
       this._isSubmitting = false;
     }

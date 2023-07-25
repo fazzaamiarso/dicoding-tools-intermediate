@@ -3,7 +3,7 @@ import { customElement } from "lit/decorators.js";
 import { localized, msg } from "@lit/localize";
 import { allLocales } from "../generated/locale-codes";
 import { getLocale, localeNames, setLocaleFromUrl } from "@/services/localization-service";
-import LitNoShadow from "./lit-no-shadow";
+import LitNoShadow from "./base/lit-no-shadow";
 
 @customElement("locale-picker")
 @localized()

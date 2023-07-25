@@ -5,3 +5,4 @@ import "./bs-icon";
 import "./scroll-top";
 import "./locale-picker";
 import "./password-field";
+import "./base";
