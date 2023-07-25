@@ -21,7 +21,6 @@ class RegisterPage extends LitNoShadow {
 
   private async _onSubmit(event: Event) {
     event.preventDefault();
-    if (!this.form) return;
 
     this._isSubmitting = true;
 

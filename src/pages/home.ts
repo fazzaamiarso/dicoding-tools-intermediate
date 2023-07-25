@@ -4,7 +4,7 @@ import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
 import { Task } from "@lit-labs/task";
 import LitNoShadow from "@/components/lit-no-shadow";
-import storyService from "@/services/story-service";
+import storyService from "@/services/api/story-service";
 import { Story } from "@/types";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
@@ -15,11 +15,7 @@ import authService from "@/services/api/auth-service";
 class HomePage extends LitNoShadow {
   private _storyTask = new Task(
     this,
-    async () => {
-      const { error, message, data } = await storyService.getAllStories();
-      if (error) throw Error(message);
-      return data ?? [];
-    },
+    async () => storyService.getAllStories(),
     () => [],
   );
 
@@ -36,7 +32,7 @@ class HomePage extends LitNoShadow {
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
           ${this._storyTask.render({
             pending: () => map(range(9), this._renderPlaceholder),
-            complete: (stories) => stories.map(this._renderStoryCard),
+            complete: ({ data }) => data.map(this._renderStoryCard),
           })}
         </div>`,
     );

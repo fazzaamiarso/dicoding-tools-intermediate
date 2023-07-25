@@ -2,7 +2,10 @@ import storageStore from "@/utils/storage-store";
 import { storyClient } from "./story-client";
 import apiConfig from "@/constants/api";
 
-const login = async (credentials: { email: string; password: string }) => {
+type RegisterInput = { name: string; email: string; password: string };
+type LoginInput = Omit<RegisterInput, "name">;
+
+const login = async (credentials: LoginInput) => {
   try {
     const response = await storyClient.post("login", credentials);
     const accessToken = response.data.loginResult.token;
@@ -12,7 +15,7 @@ const login = async (credentials: { email: string; password: string }) => {
   }
 };
 
-const register = async (credentials: { name: string; email: string; password: string }) => {
+const register = async (credentials: RegisterInput) => {
   try {
     await storyClient.post("register", credentials);
     return { error: false, message: "Success" };

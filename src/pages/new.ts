@@ -1,28 +1,49 @@
-import { customElement } from "lit/decorators.js";
+/* eslint-disable no-param-reassign */
+import { customElement, query, state } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
+import Toastify from "toastify-js";
 import LitNoShadow from "@/components/lit-no-shadow";
 import { appTemplate } from "@/components/layout/app-template";
-import storyService from "@/services/story-service";
+import storyService from "@/services/api/story-service";
 import authService from "@/services/api/auth-service";
 
 @customElement("new-page")
 @localized()
 class NewPage extends LitNoShadow {
+  @query("form") form!: HTMLFormElement;
+
+  @state() private _isSubmitting = false;
+
   private async _onSubmit(e: Event) {
     e.preventDefault();
-    if (!(e.currentTarget instanceof HTMLFormElement)) return;
+    this._isSubmitting = true;
 
-    this._validateForm(e.currentTarget);
-    if (!this._isFormValid(e.currentTarget)) return;
+    this._validateForm();
+    if (!this._isFormValid()) {
+      this._setValidationMessage();
+      this._isSubmitting = false;
+      return;
+    }
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(this.form);
     const imageFile = formData.get("story-image") as File;
     const description = formData.get("story-description") as string;
 
-    await storyService.addStory({ photo: imageFile, description });
-
-    window.location.assign("/");
+    try {
+      await storyService.addStory({ photo: imageFile, description });
+      window.location.assign("/");
+    } catch (error: any) {
+      Toastify({
+        text: error.message,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+      }).showToast();
+    } finally {
+      this._isSubmitting = false;
+    }
   }
 
   // eslint-disable-next-line consistent-return
@@ -32,12 +53,18 @@ class NewPage extends LitNoShadow {
     }
   }
 
-  private _validateForm(form: HTMLFormElement) {
-    form.classList.add("was-validated");
+  private _setValidationMessage() {
+    this.form.querySelectorAll("input").forEach((input) => {
+      input.parentElement!.querySelector(".invalid-feedback")!.innerHTML = input.validationMessage;
+    });
   }
 
-  private _isFormValid(form: HTMLFormElement) {
-    return form.checkValidity();
+  private _validateForm() {
+    this.form.classList.add("was-validated");
+  }
+
+  private _isFormValid() {
+    return this.form.checkValidity();
   }
 
   protected render() {
@@ -63,7 +90,12 @@ class NewPage extends LitNoShadow {
             <p class="valid-feedback">${msg("Look's good!")}</p>
             <p class="invalid-feedback">${msg("Please provide a valid description")}</p>
           </div>
-          <button class="btn btn-primary">${msg("Post Story")}</button>
+          ${this._isSubmitting
+            ? html`<button class="btn btn-primary container" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>`
+            : html`<button class="btn btn-primary container">${msg("Post Story")}</button>`}
         </form>
       </div>`,
     );
