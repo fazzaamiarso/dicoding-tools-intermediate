@@ -10,6 +10,13 @@ import storyService from "@/services/story-service";
 class RegisterPage extends LitNoShadow {
   @query("form") form: HTMLFormElement | undefined;
 
+  // eslint-disable-next-line consistent-return
+  onBeforeEnter(_location: any, commands: any) {
+    if (storyService.isAuthenticated()) {
+      return commands.redirect("/");
+    }
+  }
+
   private async _onSubmit(event: Event) {
     event.preventDefault();
     if (!this.form) return;

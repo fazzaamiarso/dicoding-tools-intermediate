@@ -23,6 +23,13 @@ class HomePage extends LitNoShadow {
     () => [],
   );
 
+  // eslint-disable-next-line consistent-return
+  onBeforeEnter(_location: any, commands: any) {
+    if (!StoryService.isAuthenticated()) {
+      return commands.redirect("/login");
+    }
+  }
+
   protected render() {
     return appTemplate(
       html`<user-story></user-story>

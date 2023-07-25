@@ -25,6 +25,13 @@ class NewPage extends LitNoShadow {
     window.location.assign("/");
   }
 
+  // eslint-disable-next-line consistent-return
+  onBeforeEnter(_location: any, commands: any) {
+    if (!storyService.isAuthenticated()) {
+      return commands.redirect("/login");
+    }
+  }
+
   private _validateForm(form: HTMLFormElement) {
     form.classList.add("was-validated");
   }

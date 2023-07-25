@@ -13,6 +13,13 @@ class LoginPage extends LitNoShadow {
 
   @state() _isSubmitting = false;
 
+  // eslint-disable-next-line consistent-return
+  onBeforeEnter(_location: any, commands: any) {
+    if (storyService.isAuthenticated()) {
+      return commands.redirect("/");
+    }
+  }
+
   private async _onSubmit(event: Event) {
     event.preventDefault();
     if (!this.form) return;
@@ -21,7 +28,7 @@ class LoginPage extends LitNoShadow {
 
     this._validateForm();
     if (!this._isFormValid()) {
-      this._setValidationMessage()
+      this._setValidationMessage();
       this._isSubmitting = false;
       return;
     }
@@ -50,7 +57,7 @@ class LoginPage extends LitNoShadow {
     this.form.querySelectorAll("input").forEach((input) => {
       const parentElement = input.id === "password" ? input.parentElement?.parentElement : input.parentElement;
       // eslint-disable-next-line no-param-reassign
-      parentElement!.querySelector(".invalid-feedback")!.innerHTML = input.validationMessage
+      parentElement!.querySelector(".invalid-feedback")!.innerHTML = input.validationMessage;
     });
   }
 
