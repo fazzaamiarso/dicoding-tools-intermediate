@@ -1,4 +1,5 @@
 import "./sass/main.scss";
+import "toastify-js/src/toastify.css";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import "bootstrap";
@@ -11,4 +12,6 @@ router.setRoutes([
   { path: "/", component: "home-page" },
   { path: "/new", component: "new-page" },
   { path: "/setting", component: "setting-page" },
+  { path: "/register", component: "register-page" },
+  { path: "/login", component: "login-page" },
 ]);

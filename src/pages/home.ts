@@ -1,34 +1,33 @@
-/* eslint-disable no-underscore-dangle */
-import { customElement, state } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { range } from "lit/directives/range.js";
 import { map } from "lit/directives/map.js";
-import LitNoShadow from "@/components/lit-no-shadow";
-import StoryService from "@/services/story-service";
+import { Task } from "@lit-labs/task";
+import storyService from "@/services/api/story-service";
 import { Story } from "@/types";
 import "lazysizes";
 import "lazysizes/plugins/parent-fit/ls.parent-fit";
+import { appTemplate } from "@/components/layout/app-template";
+import AppPage from "@/components/base/app-page";
 
 @customElement("home-page")
-class HomePage extends LitNoShadow {
-  @state() private _stories: Story[] = [];
-
-  @state() private _isLoading: boolean = false;
-
-  constructor() {
-    super();
-    this._isLoading = true;
-    StoryService.getAllStories().then((result) => {
-      this._stories = result;
-      this._isLoading = false;
-    });
-  }
+class HomePage extends AppPage {
+  private _storyTask = new Task(
+    this,
+    async () => storyService.getAllStories(),
+    () => [],
+  );
 
   protected render() {
-    return html` <user-story></user-story>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
-        ${this._isLoading ? map(range(9), this._renderPlaceholder) : this._stories.map(this._renderStoryCard)}
-      </div>`;
+    return appTemplate(
+      html`<user-story></user-story>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+          ${this._storyTask.render({
+            pending: () => map(range(9), this._renderPlaceholder),
+            complete: ({ data }) => data.map(this._renderStoryCard),
+          })}
+        </div>`,
+    );
   }
 
   _renderPlaceholder() {

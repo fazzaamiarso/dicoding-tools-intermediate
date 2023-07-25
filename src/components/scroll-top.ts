@@ -1,17 +1,9 @@
-/* eslint-disable no-underscore-dangle */
 import { customElement, state } from "lit/decorators.js";
 import { LitElement, css, html } from "lit";
 import { styleMap } from "lit/directives/style-map.js";
+import { debounce } from "@/utils/debounce";
 
-const debounce = (callback: any, delay: number) => {
-  let timeout: NodeJS.Timeout;
-  return (...args: any) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      callback(...args);
-    }, delay);
-  };
-};
+const SCROLL_SHOW_VISIBLE = 750;
 
 @customElement("scroll-top")
 class ScrollTop extends LitElement {
@@ -43,7 +35,7 @@ class ScrollTop extends LitElement {
   firstUpdated(): void {
     const scrollCb = debounce(() => {
       const { scrollY } = window;
-      this._shouldShow = scrollY > 750;
+      this._shouldShow = scrollY > SCROLL_SHOW_VISIBLE;
     }, 1000);
     window.addEventListener("scroll", scrollCb);
   }

@@ -1,11 +1,17 @@
 import { customElement } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
-import LitNoShadow from "./lit-no-shadow";
+import LitNoShadow from "./base/lit-no-shadow";
+import authService from "@/services/api/auth-service";
 
 @customElement("app-header")
 @localized()
 class Header extends LitNoShadow {
+  private _logout() {
+    authService.logout();
+    window.location.assign("/login");
+  }
+
   protected render() {
     return html`
       <header class="container-sm">
@@ -50,8 +56,9 @@ class Header extends LitNoShadow {
                 />
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a href="#" class="dropdown-item">${msg("Login")}</a></li>
                 <li><a href="/setting" class="dropdown-item">${msg("Settings")}</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><button class="dropdown-item" @click=${this._logout}>${msg("Logout")}</button></li>
               </ul>
             </div>
           </div>
