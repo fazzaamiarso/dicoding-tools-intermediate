@@ -28,7 +28,7 @@ class RegisterPage extends LitNoShadow {
       <main style="height:100vh;" class="d-flex align-items-center justify-content-center container">
         <div class="container-sm">
           <h2 class="mb-4">${msg("Register")}</h2>
-          <form @submit=${this._onSubmit}>
+          <form @submit=${this._onSubmit} novalidate class="mb-4">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input id="name" name="name" class="form-control" required />
@@ -38,8 +38,16 @@ class RegisterPage extends LitNoShadow {
               <input id="email" name="email" class="form-control" required />
             </div>
             <password-field></password-field>
-            <button class="btn btn-primary">Register</button>
+            <button class="btn btn-primary container">Register</button>
           </form>
+          <p>
+            Already a member?
+            <a
+              href="/login"
+              class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >Login here</a
+            >
+          </p>
         </div>
       </main>
     `;

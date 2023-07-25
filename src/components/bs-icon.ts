@@ -8,10 +8,12 @@ class BoostrapIcon extends LitNoShadow {
 
   @property({ type: String }) textColor = "";
 
+  @property({ type: Number }) size = 24;
+
   protected render() {
     return html`<i
       class="${this.icon} ${this.textColor.length ? this.textColor : "text-secondary "}"
-      style="font-size: 24px;"
+      style="font-size: ${this.size}px;"
     ></i>`;
   }
 }

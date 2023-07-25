@@ -5,7 +5,7 @@ import LitNoShadow from "./lit-no-shadow";
 
 @customElement("password-field")
 class PasswordField extends LitNoShadow {
-  @state() _shouldShow = false;
+  @state() private _shouldShow = false;
 
   private _toggleVisibility() {
     this._shouldShow = !this._shouldShow;
@@ -21,13 +21,16 @@ class PasswordField extends LitNoShadow {
             type=${this._shouldShow ? "text" : "password"}
             name="password"
             class="form-control"
+            minlength="8"
             required
           />
           <span class="input-group-text" @click=${this._toggleVisibility}
             >${this._shouldShow
-              ? html`<bs-icon icon="bi-eye-slash-fill"></bs-icon>`
-              : html`<bs-icon icon="bi-eye-fill"></bs-icon>`}</span
+              ? html`<bs-icon icon="bi-eye-slash-fill" size=${20}></bs-icon>`
+              : html`<bs-icon icon="bi-eye-fill" size=${20}></bs-icon>`}</span
           >
+          <p class="invalid-feedback"></p>
+          <p class="valid-feedback">Look's good!</p>
         </div>
       </div>
     `;

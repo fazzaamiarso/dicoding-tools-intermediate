@@ -21,6 +21,7 @@ class LoginPage extends LitNoShadow {
 
     this._validateForm();
     if (!this._isFormValid()) {
+      this._setValidationMessage()
       this._isSubmitting = false;
       return;
     }
@@ -45,6 +46,14 @@ class LoginPage extends LitNoShadow {
     window.location.assign("/");
   }
 
+  private _setValidationMessage() {
+    this.form.querySelectorAll("input").forEach((input) => {
+      const parentElement = input.id === "password" ? input.parentElement?.parentElement : input.parentElement;
+      // eslint-disable-next-line no-param-reassign
+      parentElement!.querySelector(".invalid-feedback")!.innerHTML = input.validationMessage
+    });
+  }
+
   private _validateForm() {
     this.form.classList.add("was-validated");
   }
@@ -62,19 +71,29 @@ class LoginPage extends LitNoShadow {
       <main style="height:100vh;" class="d-flex align-items-center justify-content-center container">
         <div class="container-sm">
           <h2 class="mb-4">${msg("Login")}</h2>
-          <form @submit=${this._onSubmit} @change=${this._resetForm} novalidate>
+          <form @submit=${this._onSubmit} @change=${this._resetForm} novalidate class="mb-4">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input id="email" name="email" class="form-control" required />
+              <input id="email" name="email" type="email" class="form-control" required />
+              <p class="valid-feedback">Look's good!</p>
+              <p class="invalid-feedback"></p>
             </div>
             <password-field></password-field>
             ${this._isSubmitting
-              ? html`<button class="btn btn-primary" type="button" disabled>
+              ? html`<button class="btn btn-primary container" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                   Loading...
                 </button>`
-              : html`<button class="btn btn-primary">Login</button>`}
+              : html`<button class="btn btn-primary container">Login</button>`}
           </form>
+          <p>
+            Not a member yet?
+            <a
+              href="/register"
+              class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+              >Register here</a
+            >
+          </p>
         </div>
       </main>
     `;
