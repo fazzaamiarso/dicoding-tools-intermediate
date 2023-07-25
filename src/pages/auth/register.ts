@@ -2,7 +2,7 @@ import { customElement, query, state } from "lit/decorators.js";
 import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import authService from "@/services/api/auth-service";
-import { dangerToast } from "@/components/ui/toast";
+import { dangerToast } from "@/components/toast";
 import AuthPage from "@/components/base/auth-page";
 
 @customElement("register-page")

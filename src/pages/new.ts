@@ -4,7 +4,7 @@ import { html } from "lit";
 import { localized, msg } from "@lit/localize";
 import { appTemplate } from "@/components/layout/app-template";
 import storyService from "@/services/api/story-service";
-import { dangerToast } from "@/components/ui/toast";
+import { dangerToast } from "@/components/toast";
 import AppPage from "@/components/base/app-page";
 
 @customElement("new-page")
